@@ -1,0 +1,215 @@
+
+{% extends "base_alt.html" %}
+{% load staticfiles %}
+
+{% block  og_thumbnail_image %}
+    {%  static "img/home-share-fb.jpg" %}
+{% endblock %}
+
+{% block  og_description %}
+  	Signup for BrickBots, today and join the AEC education revolution. 
+{% endblock %}
+
+{% block  og_url %}
+    {{ request.build_absolute_uri }}
+{% endblock %}
+
+{% block  og_type %}
+    Website
+{% endblock %}
+
+{% block fbpixel %}
+    fbq('track', 'Lead');
+{% endblock %}
+
+{% block jquery %}
+
+$signUpCount = {{ count }};
+
+//$(".progress-bar").css("width", "80%").attr("aria-valuenow", "80").text("80%");
+
+function completeBlock(progressBarId){
+	$(progressBarId).css("width", "100%").attr("aria-valuenow", "100").text("Completed");
+};
+
+
+function setNewPerc(progressBarId, percentNum, newText){
+	$(progressBarId).css("width", percentNum + "%").attr("aria-valuenow", percentNum);
+
+	if (percentNum < 50) {
+		//$(progressBarId).text("Your Custom text");
+		$(progressBarId).text(newText);
+	} else {
+		$(progressBarId).text(newText);
+	}
+
+};
+
+if ($signUpCount == 0){
+	
+} else if ($signUpCount > 0 && $signUpCount < 5) {
+	$newPercent = $signUpCount/5 * 100;
+	setNewPerc("#count5", $newPercent);
+} else if ($signUpCount>=5 && $signUpCount < 15) {
+	completeBlock("#count5");
+	$newCount = $signUpCount - 5;
+	$newPercent = $newCount/(15-5) * 100;
+	setNewPerc("#count15", $newPercent);
+} else if ($signUpCount >=15 && $signUpCount < 25) {
+	completeBlock("#count5");
+	completeBlock("#count15");
+	$newCount = $signUpCount - 15;
+	$newPercent = $newCount/(25-15) * 100;
+	setNewPerc("#count25", $newPercent);
+
+} else if ($signUpCount >= 25 && $signUpCount < 50 ) {
+	completeBlock("#count5");
+	completeBlock("#count15");
+	completeBlock("#count25");
+
+	$newCount = $signUpCount - 25;
+	$newPercent = $newCount/(50-25) * 100;
+	setNewPerc("#count50", $newPercent);
+
+
+} else {
+	completeBlock("#count5");
+	completeBlock("#count15");
+	completeBlock("#count25");
+	completeBlock("#count50");
+}
+
+
+{% endblock %}
+{% include "navbar_alt.html" %}
+{% block content %}
+    <!-- Intro Header -->
+     <header id="signup" class="intro">
+        <div class="intro-body" style="position:relative;">
+            <div class="container">
+                <div class="row">
+                	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!--                 	<div class="col-md-8 col-md-offset-2">
+                        <h1>Welcome to BrickBots</h1> -->
+                        
+                        <h1>Invite Friends &amp; Earn Rewards</h1>
+                        <hr class='small' style="border-color: #00AD9F; border-width: 3px; max-width: 800px;;">
+                        <p style="font-family:'Merriweather'; color: rgba(255, 255, 255, 0.7);">Share your unique link below via Email, Facebook, Twitter, Reddit, or LinkedIn to earn membership rewards</p>
+                    </br>
+                        <div class='well'style='background-color:white; color:#999999;'>
+					{{ ref_url }}
+						</div>
+                	</div>
+            	</div>
+            	<div class="row">
+	</br>
+					<h2 style="color:#fff;">Share</h2>
+					<a href="https://www.facebook.com/sharer/sharer.php?u={{ ref_url }}" target="_blank">
+					<i class="fa fa-facebook-square fa-4x" aria-hidden="true" style="color:#fff;"></i>
+					</a>
+					<a href="https://twitter.com/home?status=Sign%20up%20for%20Brick%20Bots%20today%20and%20develop%20your%20skills%20as%20an%20AEC%20professional!"></a>
+					<i class="fa fa-twitter-square fa-4x" aria-hidden="true" style="color:#fff;"></i>
+				</a>
+					<a href="https://www.linkedin.com/shareArticle?mini=true&url=http://{{ ref_url }}&title=Sign%20up%20for%20BrickBots%20today!&summary=BrickBots%20offers%20tutorials%20for%20architects,%20engineers,%20and%20construction%20professionals.&source={{ ref_url }}" target="_blank">
+					<i class="fa fa-linkedin-square fa-4x" aria-hidden="true" style="color:#fff;"></i>
+					</a>
+					<a href="http://www.reddit.com/submit?url={{ ref_url }}&title=Sign%20up%20for%20Brick%20Bots%20today%20and%20develop%20your%20skills%20as%20an%20AEC%20professional!" target="_blank">
+					<i class="fa fa-reddit-square fa-4x" aria-hidden="true" style="color:#fff;"></i>
+					</a>
+        	</div>
+        </div>
+        <div class="container" style="position:absolute; bottom:15px; width:100%">
+            <div class="col-md-8 col-md-offset-2">
+                    <a href="#rewards" class="page-scroll">
+                        <p style="margin:0px 0px 0px 0px;font-family:'Merriweather'; font-size:75%;color: rgba(255, 255, 255, 0.7);:">Learn More</p>
+                        <i class="fa fa-chevron-down animated" style="color:#fff;"></i>
+                    </a>
+            </div>
+        </div>
+    </div>
+    </header>
+
+<!-- progress bars section -->
+<section id="rewards">
+<div class='container' style="text-align:center;">
+	<div class="row" style="text-align: center;">
+	</br>
+</br>
+<h5>Friends joined number is:{{ count }}</h5>
+</div>
+<hr/>
+<br/>
+<br/>
+<div class="row">
+	<div class="col-sm-3">
+	<h3>5 Joined</h3>
+		<div class="progress">
+			  <div class="progress-bar" id='count5' role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<hr/>
+		<span style='text-align:left !important;'>
+		<h5>Rewards Include &#58;</h5>
+			<ul>
+				<li>&#43; 1 Month of Basic Membership</li>
+			</ul>
+		</span>
+		</br>
+	</div>
+	<div class="col-sm-3">
+	<h3>15 Joined</h3>
+		<div class="progress">
+			  <div class="progress-bar" id="count15" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<hr/>
+		<span style='text-align:left !important;'>
+		<h5>Rewards Include &#58;</h5>
+			<ul>
+				<li>&#43; 1 Month of Premium Membership</li>
+			</ul>
+		</span>
+	</br>
+	</div>
+	<div class="col-sm-3">
+	<h3>25 Joined</h3>
+		<div class="progress">
+			  <div class="progress-bar" id="count25" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<hr/>
+		<span style='text-align:left !important;'>
+		<h5>Rewards Include &#58;</h5>
+			<ul>
+				<li>&#43; 6 Month(s) of Premium Membership</li>
+			</ul>
+		</span>
+		</br>
+	</div>
+	<div class="col-sm-3">
+	<h3>50 Joined</h3>
+		<div class="progress">
+			  <div class="progress-bar" id="count50" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			  	{{ count }}
+			  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<hr/>
+		<span style='text-align:left !important;'>
+		<h5>Rewards Include &#58;</h5>
+			<ul>
+				<li>&#43; 12 Month(s) of Premium Membership</li>
+			</ul>
+		</span>
+		</br>
+	</div>
+
+</div>
+</div>
+</section>
+
+
+{% endblock %}

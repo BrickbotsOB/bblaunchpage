@@ -1,0 +1,14 @@
+{% load staticfiles %}
+	    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        {% block jquery %}
+        {% endblock %}
+    });
+    </script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <script src='{%  static "js/jquery.easing.min.js" %}'></script>
+    <script src='{%  static "js/brickbots_launch.js" %}'></script>

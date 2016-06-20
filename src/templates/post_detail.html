@@ -1,0 +1,66 @@
+{% extends "base_alt.html" %}
+{% load urlify %}
+
+{% block  og_thumbnail_image %}
+    {{ instance.image.url }}
+{% endblock %}
+
+{% block  og_description %}
+    {{ instance.description }}
+{% endblock %}
+
+{% block  og_url %}
+    {{ request.build_absolute_uri }}
+{% endblock %}
+
+{% block  og_type %}
+    Blog
+{% endblock %}
+
+{% block head_title %}
+    {{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+{% block fbpixel %}
+    fbq('track', 'ViewContent');
+{% endblock %}
+
+{% block content %}
+    <header class="intro-header" style="background-image: url({{ instance.image.url }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{ title }}</h1>
+                        <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class='container'>
+        <span class="meta">Posted {% if instance.user.get_full_name %} by {{ instance.user.get_full_name }} {% endif %}on {{ instance.publish }}</span>
+    </div>
+    <hr/>
+    <div class='container'>
+{{ instance.content|linebreaks }}
+	</div>
+</div>
+<hr/>
+<div class='container'>
+	<div class='row'>
+		<p style="margin:0;"> Share this Idea</p>
+	</div>
+</br>
+	<div class='row'>
+			<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color:#3b5998;"></i><a>
+			<a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}+Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color:#4099FF;"></i><a>
+			<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}+Linkedin" target="_blank"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true" style="color:#007bb6;"></i><a>
+			<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}." target="_blank"><i class="fa fa-reddit-square fa-2x" aria-hidden="true" style="color:#900020;"></i><a>
+	</div>
+</br>
+</br>
+</div>
+
+
+{% endblock content %}

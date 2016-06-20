@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Official website of BrickBots">
+    <meta name="author" content="OpenBloo, LLC.">
+    <!-- Graphtags for Social Sharing -->
+    <meta property="og:site_name" content="BrickBots">
+    <meta property="og:description" content="{% block  og_description %}{% endblock %}">
+    <meta property="og:image" content="{% block  og_thumbnail_image %}{% endblock %}">
+    <meta property="og.url" conent="{% block  og_url %}{% endblock %}">
+    <meta property="og.type" content="{% block  og_type %}{% endblock %}">
+    <!-- End Graphtags for Social Sharing -->
+    <link rel="icon" href="">
+
+    <title>BrickBots | {{ title }} </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href='{%  static "css/bootstrap.css" %}' rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href='{%  static "css/brickbots_launch.css" %}' rel="stylesheet">
+
+    <link href='http://blackrockdigital.github.io/startbootstrap-grayscale/font-awesome/css/font-awesome.min.css' rel="stylesheet">
+    
+    <!-- <link href='http://blackrockdigital.github.io/startbootstrap-clean-blog/css/clean-blog.min.css' rel="stylesheet"> -->
+    <!-- Custom Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="view-source:http://getbootstrap.com/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1704880889776070');
+fbq('track', "PageView");
+  // Add fb Marketing Pixel
+  {% block fbpixel %}
+
+  {% endblock %}
+  // End fb Marketing Pixel
+</script>
+
+
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1704880889776070&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+  </head>
+
+  <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+      {% include "navbar.html" %}
+      {% block content %}
+      {% endblock %}
+      {% include "sitemap.html" %}
+      {% include "js.html" %}
+
+  </body>
+</html>
